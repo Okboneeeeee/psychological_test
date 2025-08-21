@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tech Odyssey: 未來之旅</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&family=Noto+Sans+TC:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --card:#152447;
+      --ink:#e6f0ff;
+      --muted:#98b4e6;
+      --primary:#5ec0ff;
+      --primary-2:#7bd3ff;
+      --accent:#99e0ff; /* 提亮藍框，避免不明顯 */
+      --danger:#ff7c7c;
+      --radius:22px;
+      --shadow:0 10px 30px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.04);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background: url("lovepik-starry-background-of-science-and-technology-image_500400275.jpg") no-repeat center center fixed;
+      background-size: cover;
+      color:var(--ink);
+      font-family:'Noto Sans TC', system-ui, -apple-system, "Microsoft JhengHei", sans-serif;
+      overflow-x:hidden;
+    }
+
+
+.wrap{min-height:100%; display:grid; place-items:center; padding:48px 16px}
+.card{width:min(860px, 92vw); background:rgba(21,36,71,0.9); border-radius:var(--radius); box-shadow:var(--shadow); padding:36px 26px; border:1px solid rgba(255,255,255,.06)}
+.card.narrow{width:min(720px, 92vw)}
+
+.title{font-family:'Noto Serif TC', serif; font-weight:900; font-size:40px; line-height:1.2; margin:0 0 6px}
+.subtitle{ font-size:18px; opacity:.9; }
+
+/* 標題層級與字重更接近截圖 */
+.section-title{
+font-size:24px;                     /* 原本 22 → 24 */
+font-weight:900;
+}
+
+/* 讓每題的卡片更像截圖：圓角更大、邊框更亮 */
+.qblock{
+border-radius:22px;                /* 原本 16 → 22 */
+border:2px solid #7aa8ff;          /* 輕微偏紫藍，接近截圖 */
+padding:28px;                       /* 空間更鬆 */
+}
+
+/* ===== 問卷選項按鈕：膠囊＋常態淡漸層＋粗體置中 ===== */
+.btn{
+  display:block;
+  width:min(560px, 92%);
+  margin:12px auto;
+  padding:16px 22px;
+  border-radius:999px;                          /* 膠囊形狀 */
+  background:linear-gradient(180deg, rgba(123,211,255,.18) 0%, rgba(94,192,255,.10) 100%);  /* 常態淡漸層 */
+  border:2px solid #99e0ff;
+  color:var(--ink);
+  font-weight:800;                               /* 粗體 */
+  font-size:16.5px;
+  text-align:center;                             /* 置中 */
+  letter-spacing:.3px;
+  cursor:pointer;
+  box-shadow:0 2px 10px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.10);
+  transition:transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
+}
+
+/* hover：微放大＋更亮的漸層 */
+.btn:hover{
+  transform:scale(1.03);
+  background:linear-gradient(180deg, rgba(123,211,255,.28) 0%, rgba(94,192,255,.18) 100%);
+  box-shadow:0 8px 22px rgba(94,192,255,.30);
+}
+
+/* active（按下去）：稍微回彈 */
+.btn:active{
+  transform:scale(0.99);
+  box-shadow:0 6px 16px rgba(94,192,255,.25);
+}
+
+/* selected（被選取）：實心亮漸層＋深色字 */
+.btn.selected{
+  background:linear-gradient(180deg, var(--primary) 0%, var(--primary-2) 100%);
+  color:#0b1733;
+  border-color:#bdeaff;
+  box-shadow:0 12px 26px rgba(94,192,255,.40);
+}
+
+/* 鍵盤可及性：聚焦外框 */
+.btn:focus-visible{
+  outline:none;
+  box-shadow:0 0 0 3px rgba(153,224,255,.65), 0 10px 24px rgba(94,192,255,.35);
+}
+
+/* hover 與 selected 一樣維持你要的效果 */
+.btn:hover{ background:rgba(94,192,255,0.12); }
+.btn.selected{
+background:linear-gradient(180deg, var(--primary) 0%, var(--primary-2) 100%);
+color:#0b1733;
+box-shadow:0 10px 24px rgba(94,192,255,.35);
+border-color:#99e0ff;
+}
+
+.home-btn{
+  width:200px;      /* 你要的寬度 */
+  padding:12px 18px; /* 控制高度 */
+  font-size:15px;   /* 字體大小 */
+}
+
+
+/* 提交按鈕同風格（可與上方共用） */
+#submitBtn{
+  display:inline-block;
+  min-width:200px;
+  padding:14px 22px;
+  border-radius:999px;
+  border:2px solid #99e0ff;
+  background:linear-gradient(180deg, rgba(123,211,255,.18) 0%, rgba(94,192,255,.10) 100%);
+  color:var(--ink);
+  font-weight:900;
+  letter-spacing:.4px;
+  transition:transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
+}
+#submitBtn:hover{
+  transform:scale(1.03);
+  background:linear-gradient(180deg, rgba(123,211,255,.30) 0%, rgba(94,192,255,.20) 100%);
+  box-shadow:0 8px 22px rgba(94,192,255,.30);
+}
+#submitBtn:active{ transform:scale(0.99); }
+#submitBtn:focus-visible{
+  outline:none;
+  box-shadow:0 0 0 3px rgba(153,224,255,.65), 0 10px 24px rgba(94,192,255,.35);
+}
+
+/* 動畫偏好：若使用者減少動畫，取消縮放 */
+@media (prefers-reduced-motion: reduce){
+  .btn-row .btn, #submitBtn{
+    transition:none;
+  }
+  .btn-row .btn:hover, #submitBtn:hover,
+  .btn-row .btn:active, #submitBtn:active{
+    transform:none;
+  }
+}
+
+
+
+
+
+.pill{display:inline-block; padding:6px 10px; border-radius:999px; border:1px solid rgba(126,168,255,.4); color:var(--muted); font-size:12px}
+
+.footer-note{color:#ffaaaa; text-align:center; margin-top:18px}
+
+.result-title{font-family:'Noto Serif TC', serif; font-size:34px; font-weight:900; text-align:center; margin:0 0 8px}
+.result-sub{font-family:'Noto Serif TC', serif; font-size:18px; color:var(--muted); text-align:center; margin:0 0 18px}
+
+.result-choice{display:grid; gap:14px; margin-top:16px}
+
+.chip{display:inline-flex; align-items:center; gap:8px; background:#101b3a; border:1px solid rgba(126,168,255,.25); padding:8px 12px; border-radius:999px; color:var(--muted); font-size:13px}
+
+.link-btn{width:100%; border-radius:12px; border:2px solid rgba(255,255,255,.15); background:transparent; color:var(--ink); padding:14px 16px; cursor:pointer; font-weight:800; letter-spacing:.5px; transition: all .25s ease}
+.link-btn:hover{background:linear-gradient(180deg, var(--primary) 0%, var(--primary-2) 100%); color:#0b1733; box-shadow:0 8px 20px rgba(139,124,255,.25)}
+
+.backbar{display:flex; gap:12px; justify-content:center; margin-top:18px}
+.tiny{font-size:12px; color:var(--muted)}
+
+.hr{height:1px; background:linear-gradient(90deg, transparent, rgba(255,255,255,.15), transparent); margin:22px 0}
+
+.proj-title{font-family:'Noto Serif TC', serif; font-size:30px; font-weight:900; margin:0 0 10px}
+.proj-meta{color:var(--muted); margin:0 0 14px}
+.proj-sec{margin:14px 0}
+.proj-sec h4{margin:0 0 8px; font-size:18px}
+.proj-sec p{margin:0; line-height:1.8}
+
+
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section id="view-home" class="card" aria-live="polite">
+      <h1 class="title">Tech Odyssey: 未來之旅</h1>
+      <p class="subtitle">探索科技與人文的無限可能</p>
+
+
+  <div class="qblock">
+    <div class="section-title">1. 在星際航行中，你更想升級哪種能力？<br><span class="tiny"></span></div>
+    <div class="btn-row">
+      <button class="btn" data-q="q1" data-v="導航系統">導航系統：策略思考與科技工具</button>
+      <button class="btn" data-q="q1" data-v="船員管理">船員管理：人際溝通與團隊發展</button>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div class="section-title">2. 你的探索方式像哪一種太空旅人？</div>
+    <div class="btn-row">
+      <button class="btn" data-q="q2" data-v="資料派">資料派：用數據與科技了解世界</button>
+      <button class="btn" data-q="q2" data-v="人本派">人本派：從人性與需求設計未來</button>
+    </div>
+  </div>
+
+  <div class="qblock">
+    <div class="section-title">3. 如果你正航行在未來宇宙中，你的首要任務是？</div>
+    <div class="btn-row">
+      <button class="btn" data-q="q3" data-v="打造工具">打造工具與系統來解決問題</button>
+      <button class="btn" data-q="q3" data-v="引導夥伴">引導夥伴發現自我與成長</button>
+    </div>
+  </div>
+
+  <p id="pending" class="footer-note" style="display:none">尚有題目未作答，請繼續你的選擇</p>
+  <div class="backbar">
+    <button id="submitBtn" class="#submitBtn" style="min-width:180px">提交問卷</button>
+  </div>
+</section>
+
+<section id="view-result" class="card narrow" style="display:none">
+  <h2 class="result-title">興趣取向分析</h2>
+  <p class="result-sub">推薦專題</p>
+  <div id="chips" class="chipbar" style="text-align:center; margin-bottom:10px"></div>
+  <div id="resultList" class="result-choice"></div>
+  <div class="backbar">
+    <button class="btn home-btn"  onclick="goto('home')">返回首頁</button>
+  </div>
+</section>
+
+<section id="view-project" class="card narrow" style="display:none">
+  <div class="pill" id="projCat">分類</div>
+  <h3 class="proj-title" id="projTitle">專題標題</h3>
+  <p class="proj-meta" id="projTeam"></p>
+  <div id="projBody"></div>
+  <div class="hr"></div>
+  <div class="backbar">
+    <button class="btn" onclick="goto('result')">上一頁</button>
+    <button class="btn" onclick="goto('home')">返回首頁</button>
+  </div>
+</section>
+
+
+  </main>
+
+  <script>
+    // 工具函式
+    const $ = (sel)=>document.querySelector(sel);
+    const $$ = (sel)=>[...document.querySelectorAll(sel)];
+
+    // 確保 DOM 準備好再綁事件（避免計時問題導致點了沒反應）
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const answers = { q1:null, q2:null, q3:null };
+
+      // 點選：同題互斥 + 設為 selected（保持淺藍實心）
+      $$(".btn[data-q]").forEach(btn=>{
+        btn.addEventListener('click',()=>{
+          const q = btn.dataset.q, v = btn.dataset.v;
+          answers[q] = v;
+          $$(`.btn[data-q="${q}"]`).forEach(b=>b.classList.remove('selected'));
+          btn.classList.add('selected');
+          const pend = $('#pending');
+          if(pend) pend.style.display='none';
+        });
+      });
+
+      // 提交檢查
+      const submit = $('#submitBtn');
+      if(submit){
+        submit.addEventListener('click',()=>{
+          if(!answers.q1 || !answers.q2 || !answers.q3){
+            const pend = $('#pending');
+            if(pend) pend.style.display='block';
+            return;
+          }
+          showResult(answers);
+        });
+      }
+
+      // 導頁
+      window.goto = function(view){
+        $('#view-home').style.display = (view==='home')? 'block':'none';
+        $('#view-result').style.display = (view==='result')? 'block':'none';
+        $('#view-project').style.display = (view==='project')? 'block':'none';
+        window.scrollTo({top:0, behavior:'smooth'});
+      }
+
+      // A~H 對應
+      const keyToLetter = {
+        '導航系統|資料派|打造工具':'A',
+        '導航系統|資料派|引導夥伴':'B',
+        '導航系統|人本派|打造工具':'C',
+        '導航系統|人本派|引導夥伴':'D',
+        '船員管理|資料派|打造工具':'E',
+        '船員管理|資料派|引導夥伴':'F',
+        '船員管理|人本派|打造工具':'G',
+        '船員管理|人本派|引導夥伴':'H'
+      };
+
+      const categories = {
+        'A': { name:'導航系統 → 資料派 → 打造工具' },
+        'B': { name:'導航系統 → 資料派 → 引導夥伴' },
+        'C': { name:'導航系統 → 人本派 → 打造工具' },
+        'D': { name:'導航系統 → 人本派 → 引導夥伴' },
+        'E': { name:'船員管理 → 資料派 → 打造工具' },
+        'F': { name:'船員管理 → 資料派 → 引導夥伴' },
+        'G': { name:'船員管理 → 人本派 → 打造工具' },
+        'H': { name:'船員管理 → 人本派 → 引導夥伴' }
+      };
+
+      const projects = {
+        'GaAsBi 預測 AI（科學研究工具）':{id:'gaasbi', cat:'A', team:'組員：倪咸安、鄭銘霆', intro:'以 PINNs 結合物理與資料，預測 GaAsBi 成長中的 Bi 含量。', detail:{motive:'GaAsBi 製程 Bi 含量難以控制。', desc:'以基板溫度與束流比預測 Bi 成分，降低實驗成本。'}},
+        'TradeNova 智慧投資平台（財經分析工具）':{id:'tradenova', cat:'A', team:'', intro:'新手友善的投資學習與模擬交易平台。', detail:{motive:'零基礎模擬平台不足。', desc:'策略回測＋互動解析，協助理解。'}},
+        '遠端影像辨識＋機械手臂（幫助遠端作業的系統）':{id:'remote-robot', cat:'B', team:'組員：孫士傑、廖誌晨、吳承翰、郭翰文', intro:'YOLO + 六軸手臂的遠端作業平台。', detail:{motive:'遠距實作缺乏臨場互動。', desc:'WebRTC 串流、MQTT 控制，教育與製造可用。'}},
+        'AI面試語言解碼（幫助 HR 判斷的 AI 夥伴）':{id:'lexia', cat:'B', team:'', intro:'以文字語料分析的 AI 面試系統。', detail:{motive:'快速面試提高錯錄風險。', desc:'語言邏輯＋職能結構，公平可解釋。'}},
+        'Snap Plate 食譜辨識（生活健康工具）':{id:'snap-plate', cat:'C', team:'', intro:'上傳食材照片自動辨識並推薦食譜。', detail:{motive:'不知道煮什麼與食材浪費。', desc:'影像辨識＋食譜資料庫與步驟。'}},
+        '智慧路牌系統（智慧導航硬體）':{id:'smart-sign', cat:'C', team:'', intro:'互動面板＋可轉向指示牌的校園導覽。', detail:{motive:'訪客找路不便。', desc:'Web 遠端 + ESP32 控制硬體。'}},
+        'PiCare 醫療管理（AI 照護幫手）':{id:'picare', cat:'D', team:'', intro:'拍照記錄生命徵象與用藥，生成回診報告。', detail:{motive:'慢性病追蹤需求增加。', desc:'跨個案管理與長者友善操作。'}},
+        'AI學習同伴 AIBuddy（學習對話夥伴）':{id:'aibuddy', cat:'D', team:'', intro:'以 GROW 模型引導，不直接給答案。', detail:{motive:'AI 學習易忽略思考過程。', desc:'對話引導強化運算思維。'}},
+        '未來造物島（AI 協助紀錄學習）':{id:'maker-island', cat:'E', team:'', intro:'語音轉文字 + 生成式 AI 彙整討論與學習歷程。', detail:{motive:'教師難以公平記錄每位學生參與。', desc:'自動生成個人化紀錄，輔助評量。'}},
+        '紙尖上的藝數（摺紙數學工具）':{id:'origami-math', cat:'E', team:'', intro:'以摺紙藝術引入數學概念與教材。', detail:{motive:'學生抗拒數學。', desc:'教學影片與實作小夜燈。'}},
+        'EAPic 員工協助遊戲化平台（心理健康夥伴）':{id:'eapic', cat:'F', team:'', intro:'2D 海底世界遊戲化 EAP 學習。', detail:{motive:'EAP 參與度低。', desc:'三大面向關卡設計，提升動機。'}},
+        'WingChat AI社交教練（人際互動夥伴）':{id:'wingchat', cat:'F', team:'', intro:'在地化 LLM 角色互動，提供社交練習。', detail:{motive:'大學生社交焦慮常見。', desc:'即時回饋與成長追蹤。'}},
+        '樂活無齡—互動教學（健康教育教具）':{id:'senior-health', cat:'G', team:'', intro:'餐盒互動教具推廣長者健康力。', detail:{motive:'超高齡社會下宣導需求。', desc:'Arduino RFID + 多模式遊戲。'}},
+        '防災桌遊《勇者別慌！》（防災學習工具）':{id:'disaster-game', cat:'G', team:'', intro:'實體＋數位防災桌遊，強化應變能力。', detail:{motive:'靜態教材成效有限。', desc:'RFID 感應 + App 題庫管理。'}},
+        'Inner Speech 遊戲（焦慮探索陪伴）':{id:'inner-speech', cat:'H', team:'', intro:'2D 解謎遊戲體驗社交焦慮並學習共處。', detail:{motive:'需沉浸式體驗建立同理。', desc:'現實挑戰 × 裡世界雙線敘事。'}},
+        'VR 社交情緒學習系統（SEL 學習陪伴）':{id:'vr-sel', cat:'H', team:'', intro:'VR 互動與 AI 影片比較 SEL 成效。', detail:{motive:'傳統教材難激發同理與參與。', desc:'SECQ/QACSE 前後測驗證成效。'}}
+      };
+
+      function computeLetter(a){
+        const key = `${a.q1}|${a.q2}|${a.q3}`;
+        return keyToLetter[key];
+      }
+
+      window.showResult = function(a){
+        const letter = computeLetter(a);
+        const chips = [a.q1, a.q2, a.q3].map(t=>`<span class="chip">${t}</span>`).join(' ');
+        $('#chips').innerHTML = chips;
+
+        const list = Object.entries(projects).filter(([,p])=>p.cat===letter);
+        $('#resultList').innerHTML = list.map(([name, p])=>{
+          return `<button class="link-btn" onclick="openProject('${p.id}')">${name.replace(/（.+?）/, '')}</button>`
+        }).join('');
+
+        goto('result');
+      }
+
+      window.openProject = function(pid){
+        const entry = Object.values(projects).find(p=>p.id===pid);
+        if(!entry) return;
+        $('#projCat').textContent = (categories[entry.cat]?.name)||'';
+        $('#projTitle').textContent = Object.keys(projects).find(k=>projects[k]===entry).replace(/（.+?）/, '（粗體）');
+        $('#projTeam').textContent = entry.team || '';
+        const html = `
+          <div class="proj-sec"><h4>專題簡介</h4><p>${entry.intro}</p></div>
+          ${entry.detail?.motive? `<div class=\"proj-sec\"><h4>專題動機</h4><p>${entry.detail.motive}</p></div>`:''}
+          ${entry.detail?.desc? `<div class=\"proj-sec\"><h4>專題介紹</h4><p>${entry.detail.desc}</p></div>`:''}
+        `;
+        $('#projBody').innerHTML = html;
+        goto('project');
+      }
+
+      // 預設顯示首頁
+      goto('home');
+    });
+  </script>
+
+</body>
+</html>
